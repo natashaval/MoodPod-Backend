@@ -1,1 +1,1 @@
-rootProject.name = "moodify"
+rootProject.name = "moodpod"

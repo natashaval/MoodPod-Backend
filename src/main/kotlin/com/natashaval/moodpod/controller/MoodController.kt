@@ -1,6 +1,6 @@
-package com.natashaval.moodify.controller
+package com.natashaval.moodpod.controller
 
-import com.natashaval.moodify.model.Mood
+import com.natashaval.moodpod.model.Mood
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController

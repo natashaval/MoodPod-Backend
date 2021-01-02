@@ -1,11 +1,11 @@
-package com.natashaval.moodify
+package com.natashaval.moodpod
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class MoodifyApplication
+class MoodpodApplication
 
 fun main(args: Array<String>) {
-	runApplication<MoodifyApplication>(*args)
+	runApplication<MoodpodApplication>(*args)
 }
