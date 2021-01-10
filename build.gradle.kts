@@ -23,8 +23,16 @@ dependencies {
 
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
+
+	// Database
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.postgresql:postgresql")
+
+	// Swagger documentation
+	implementation("io.springfox:springfox-boot-starter:3.0.0")
+
+	// Lombok
+	implementation("org.projectlombok:lombok:1.18.16")
 }
 
 tasks.withType<KotlinCompile> {
