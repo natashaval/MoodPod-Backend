@@ -5,29 +5,36 @@ import com.natashaval.moodpod.service.MoodService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping(value = ["/mood"], produces = [MediaType.APPLICATION_JSON_VALUE])
 class MoodController constructor(@Autowired private val service: MoodService) {
 
   @GetMapping("")
-  fun getMoods(): List<Mood> {
+  fun getMoods(): Flux<Mood> {
     return service.findAll()
   }
 
   @PostMapping("")
-  fun saveMood(@RequestBody mood: Mood): Mood {
+  fun saveMood(@RequestBody mood: Mood): Mono<Mood> {
     return service.save(mood)
   }
 
+  @GetMapping("/{id}")
+  fun getMoodById(@PathVariable("id") id: String): Mono<Mood> {
+    return service.findById(id)
+  }
+
   @PutMapping("/{id}")
-  fun updateMood(@PathVariable("id") id: Int, @RequestBody mood: Mood): Mood {
+  fun updateMood(@PathVariable("id") id: String, @RequestBody mood: Mood): Mono<Mood> {
     mood.id = id
     return service.save(mood)
   }
 
   @DeleteMapping("/{id}")
-  fun deleteMood(@PathVariable("id") id: Int) {
+  fun deleteMood(@PathVariable("id") id: String): Mono<Boolean> {
     return service.deleteById(id)
   }
 }

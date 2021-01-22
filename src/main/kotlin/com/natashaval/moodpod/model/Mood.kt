@@ -1,14 +1,13 @@
 package com.natashaval.moodpod.model
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 import java.util.*
-import javax.persistence.*
 
-@Entity
-@Table(name = "moods")
+@Document(collection = "moods")
 data class Mood(
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  var id: Int,
+  var id: String?,
   val name: String? = null,
   val message: String? = null,
   val createdAt: Date? = null
