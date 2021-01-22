@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.10.RELEASE"
 	kotlin("jvm") version "1.4.21"
 	kotlin("plugin.spring") version "1.4.21"
+	kotlin("plugin.jpa") version "1.4.21"
 }
 
 group = "com.natashaval"
@@ -30,9 +31,6 @@ dependencies {
 
 	// Swagger documentation
 	implementation("io.springfox:springfox-boot-starter:3.0.0")
-
-	// Lombok
-	implementation("org.projectlombok:lombok:1.18.16")
 }
 
 tasks.withType<KotlinCompile> {
