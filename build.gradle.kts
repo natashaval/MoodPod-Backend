@@ -25,9 +25,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 
-	// Database
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.postgresql:postgresql")
+	// Database PostgreSQL
+//	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+//	implementation("org.postgresql:postgresql")
+	// Database MongoDB reactive
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 
 	// Swagger documentation
 	implementation("io.springfox:springfox-boot-starter:3.0.0")
