@@ -19,16 +19,31 @@ import reactor.core.publisher.Mono
 
 //  https://stackoverflow.com/questions/45365791/spring-webflux-emit-exception-upon-null-value-in-spring-data-mongodb-reactive-r/45392930
   override fun findById(id: String): Mono<Mood> {
-    return repository.findById(id).switchIfEmpty(Mono.error(NotFoundException("Employee not found!")))
+    return repository.findById(id).switchIfEmpty(Mono.error(NotFoundException("Mood not found!")))
   }
 
   override fun deleteById(id: String): Mono<Boolean> {
-    repository.deleteById(id)
-    return Mono.just(true)
+    return repository.existsById(id).flatMap { exists ->
+      if (exists) {
+        repository.deleteById(id).then(Mono.just(true))
+      } else {
+        Mono.just(false)
+      }
+    }
   }
 
   override fun save(mood: Mood): Mono<Mood> {
     return repository.save(mood)
+  }
+
+  override fun updateById(id: String, mood: Mood): Mono<Mood> {
+    return repository.existsById(id).flatMap { exists ->
+      if (exists) {
+        save(mood)
+      } else {
+        Mono.error(NotFoundException("Mood not found!"))
+      }
+    }
   }
 
 }

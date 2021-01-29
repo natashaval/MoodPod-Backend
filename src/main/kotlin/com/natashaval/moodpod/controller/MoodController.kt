@@ -30,7 +30,7 @@ class MoodController constructor(@Autowired private val service: MoodService) {
   @PutMapping("/{id}")
   fun updateMood(@PathVariable("id") id: String, @RequestBody mood: Mood): Mono<Mood> {
     mood.id = id
-    return service.save(mood)
+    return service.updateById(id, mood)
   }
 
   @DeleteMapping("/{id}")

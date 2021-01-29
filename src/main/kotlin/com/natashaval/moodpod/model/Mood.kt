@@ -8,7 +8,7 @@ import java.util.*
 data class Mood(
   @Id
   var id: String?,
-  val name: String? = null,
+  val mood: String? = null,
   val message: String? = null,
-  val createdAt: Date? = null
+  val date: Date? = null
 )

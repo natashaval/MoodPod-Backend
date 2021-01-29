@@ -8,5 +8,6 @@ interface MoodService {
   fun findAll(): Flux<Mood>
   fun findById(id: String): Mono<Mood>
   fun deleteById(id: String): Mono<Boolean>
+  fun updateById(id: String, mood: Mood): Mono<Mood>
   fun save(mood: Mood): Mono<Mood>
 }

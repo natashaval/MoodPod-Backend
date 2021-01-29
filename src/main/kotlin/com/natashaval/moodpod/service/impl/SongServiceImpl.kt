@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono
   }
 
   override fun findByTitle(title: String): Flux<Song> {
-    return repository.findByTitle(title)
+    return repository.findByTitleContainingIgnoreCase(title)
 
   }
 
