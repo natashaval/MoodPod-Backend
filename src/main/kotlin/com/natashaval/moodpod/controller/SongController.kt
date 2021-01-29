@@ -35,11 +35,11 @@ class SongController constructor(
   @PutMapping("/{id}")
   fun updateSong(@PathVariable("id") id: String, @RequestBody song: Song): Mono<Song> {
     song.id = id
-    return service.save(song)
+    return service.updateById(id, song)
   }
 
   @DeleteMapping("/{id}")
-  fun deleteById(@PathVariable("id") id: String) {
-    service.deleteById(id).subscribe()
+  fun deleteById(@PathVariable("id") id: String): Mono<Boolean> {
+    return service.deleteById(id)
   }
 }

@@ -1,5 +1,6 @@
 package com.natashaval.moodpod.service.impl
 
+import com.natashaval.moodpod.exception.NotFoundException
 import com.natashaval.moodpod.model.Song
 import com.natashaval.moodpod.repository.SongRepository
 import com.natashaval.moodpod.service.SongService
@@ -17,11 +18,12 @@ import reactor.core.publisher.Mono
   }
 
   override fun findById(id: String): Mono<Song> {
-    return repository.findById(id)
+    return repository.findById(id).switchIfEmpty(Mono.error(NotFoundException("Song not found!")))
   }
 
   override fun findByTitle(title: String): Flux<Song> {
     return repository.findByTitleContainingIgnoreCase(title)
+      .switchIfEmpty(Mono.error(NotFoundException("No songs found with this title: $title!")))
 
   }
 
@@ -30,8 +32,23 @@ import reactor.core.publisher.Mono
   }
 
   override fun deleteById(id: String): Mono<Boolean> {
-    repository.deleteById(id)
-    return Mono.just(true)
+    return repository.existsById(id).flatMap { exists ->
+      if (exists) {
+        repository.deleteById(id).then(Mono.just(true))
+      } else {
+        Mono.just(false)
+      }
+    }
+  }
+
+  override fun updateById(id: String, song: Song): Mono<Song> {
+    return repository.existsById(id).flatMap { exists ->
+      if (exists) {
+        save(song)
+      } else {
+        Mono.error(NotFoundException("Song not found!"))
+      }
+    }
   }
 
 }

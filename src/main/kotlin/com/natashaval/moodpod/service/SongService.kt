@@ -10,4 +10,5 @@ interface SongService {
   fun findByTitle(title: String): Flux<Song>
   fun save(song: Song): Mono<Song>
   fun deleteById(id: String): Mono<Boolean>
+  fun updateById(id: String, song: Song): Mono<Song>
 }
