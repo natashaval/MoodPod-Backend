@@ -24,4 +24,7 @@ Reason: Failed to determine a suitable driver class
    - https://stackoverflow.com/questions/45365791/spring-webflux-emit-exception-upon-null-value-in-spring-data-mongodb-reactive-r/45392930
    - **FIX2**: enable server.error.include-message=always in application.properties
    - https://stackoverflow.com/questions/49137253/how-could-we-use-exceptionhandler-with-spring-web-flux
-   - https://stackoverflow.com/questions/62459836/exception-message-not-included-in-response-when-throwing-responsestatusexception
+   - https://stackoverflow.com/questions/62459836/exception-message-not-included-in-response-when-throwing-responsestatusexception  
+4. Get First day of Month and end day of month
+   - https://stackoverflow.com/questions/3083781/start-and-end-date-of-a-current-month
+   - https://stackoverflow.com/questions/22223786/get-first-and-last-day-of-month-using-threeten-localdate

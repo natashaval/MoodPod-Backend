@@ -3,10 +3,12 @@ package com.natashaval.moodpod.controller
 import com.natashaval.moodpod.model.Mood
 import com.natashaval.moodpod.service.MoodService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import java.util.*
 
 @RestController
 @RequestMapping(value = ["/mood"], produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -36,5 +38,13 @@ class MoodController constructor(@Autowired private val service: MoodService) {
   @DeleteMapping("/{id}")
   fun deleteMood(@PathVariable("id") id: String): Mono<Boolean> {
     return service.deleteById(id)
+  }
+
+  //  https://www.baeldung.com/spring-date-parameters
+  @GetMapping("/search") fun findMoodByMonthYear(
+    @RequestParam(name = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    date: Date?
+  ): Flux<Mood> {
+    return service.findMoodByMonthYear(date)
   }
 }
