@@ -11,7 +11,6 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.YearMonth
 import java.util.*
 
 @Service
@@ -60,11 +59,11 @@ class MoodServiceImpl constructor(
     val lastDay = localDate.withDayOfMonth(localDate.lengthOfMonth()).atTime(LocalTime.MAX)
     println("localDate: $localDate, firstDay: $firstDay, lastDay: $lastDay, lengthOfMonth: ${localDate.lengthOfMonth()}")
     return repository.findByDateBetween(firstDay, lastDay)
-
-    // Why should plus 1 day? if not, the query will be like
-    // localDate: 2021-01-31, firstDay: 2021-01-01, lastDay: 2021-01-31, lengthOfMonth: 31
-    // find using query: { "date" : { "$gt" : { "$date" : "2020-12-31T17:00:00Z"}, "$lt" : { "$date" : "2021-01-30T17:00:00Z"}}}
-    // is this because using LOCAL date?
   }
 
+  override fun findMoodBetween(start: Date, end: Date): Flux<Mood> {
+    val startDay = start.convertToLocalDate().atStartOfDay()
+    val endDay = end.convertToLocalDate().atTime(LocalTime.MAX)
+    return repository.findByDateBetween(startDay, endDay)
+  }
 }

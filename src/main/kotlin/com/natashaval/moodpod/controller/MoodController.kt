@@ -41,10 +41,17 @@ class MoodController constructor(@Autowired private val service: MoodService) {
   }
 
   //  https://www.baeldung.com/spring-date-parameters
-  @GetMapping("/search") fun findMoodByMonthYear(
+  @GetMapping("/history") fun findMoodByMonthYear(
     @RequestParam(name = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     date: Date?
   ): Flux<Mood> {
     return service.findMoodByMonthYear(date)
+  }
+
+  @GetMapping("/history/range") fun findMoodBetween(
+    @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) start: Date,
+    @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) end: Date
+  ): Flux<Mood> {
+    return service.findMoodBetween(start, end)
   }
 }

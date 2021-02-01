@@ -28,3 +28,7 @@ Reason: Failed to determine a suitable driver class
 4. Get First day of Month and end day of month
    - https://stackoverflow.com/questions/3083781/start-and-end-date-of-a-current-month
    - https://stackoverflow.com/questions/22223786/get-first-and-last-day-of-month-using-threeten-localdate
+   - Why should plus 1 day? if not, the query will be like  
+   localDate: 2021-01-31, firstDay: 2021-01-01, lastDay: 2021-01-31, lengthOfMonth: 31  
+   find using query: { "date" : { "$gt" : { "$date" : "2020-12-31T17:00:00Z"}, "$lt" : { "$date" : "2021-01-30T17:00:00Z"}}}    
+   is this because using **LOCAL** date?
