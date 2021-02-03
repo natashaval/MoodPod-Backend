@@ -6,6 +6,7 @@ import com.natashaval.moodpod.repository.MoodRepository
 import com.natashaval.moodpod.service.MoodService
 import com.natashaval.moodpod.utils.DateUtils.convertToLocalDate
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -19,7 +20,7 @@ class MoodServiceImpl constructor(
 ) : MoodService {
 
   override fun findAll(): Flux<Mood> {
-    return repository.findAll()
+    return repository.findAll(Sort.by(Sort.Direction.DESC, "date"))
   }
 
   //  https://stackoverflow.com/questions/45365791/spring-webflux-emit-exception-upon-null-value-in-spring-data-mongodb-reactive-r/45392930
